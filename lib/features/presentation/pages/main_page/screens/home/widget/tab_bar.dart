@@ -7,13 +7,13 @@ class Tabbar extends StatefulWidget {
     this.title = 'Welcome Back!',
     this.subtitle = "Find today's best podcasts",
     this.hintText = "Search podcasts...",
-    required this.onSubmittedComplete,
+    required this.onChanged,
   });
 
   final String title;
   final String subtitle;
   final String hintText;
-  final Function(String) onSubmittedComplete;
+  final ValueChanged<String> onChanged;
 
   @override
   State<Tabbar> createState() => _TabbarState();
@@ -24,11 +24,17 @@ class _TabbarState extends State<Tabbar> {
   final TextEditingController _controller = TextEditingController();
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // left side
+        // Left side
         Expanded(
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 400),
@@ -42,8 +48,9 @@ class _TabbarState extends State<Tabbar> {
             ),
             child: _showSearch
                 ? TextField(
-                    key: ValueKey('searchField'),
+                    key: const ValueKey('searchField'),
                     controller: _controller,
+                    autofocus: true,
                     decoration: InputDecoration(
                       hintText: widget.hintText,
                       filled: true,
@@ -57,13 +64,11 @@ class _TabbarState extends State<Tabbar> {
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    onEditingComplete: () {
-                      widget.onSubmittedComplete(_controller.text);
-                      FocusScope.of(context).unfocus();
-                    },
+                    onChanged: widget.onChanged, // ✅ only this needed
+                    onEditingComplete: () => FocusScope.of(context).unfocus(),
                   )
                 : Column(
-                    key: ValueKey('welcomeText'),
+                    key: const ValueKey('welcomeText'),
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -86,7 +91,7 @@ class _TabbarState extends State<Tabbar> {
           ),
         ),
 
-        // right side (icon button)
+        // Right side (icon button)
         IconButton(
           icon: Icon(_showSearch ? Icons.close : Icons.search),
           style: IconButton.styleFrom(
@@ -99,6 +104,10 @@ class _TabbarState extends State<Tabbar> {
           onPressed: () {
             setState(() {
               _showSearch = !_showSearch;
+              if (!_showSearch) {
+                _controller.clear();
+                widget.onChanged(''); // ✅ reset search when closed
+              }
             });
           },
         ),

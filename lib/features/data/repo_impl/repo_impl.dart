@@ -22,9 +22,26 @@ class RepoImpl implements Repo {
   }
 
   @override
-  Future<PodcastData> searchPodcasts({required String query}) {
-    // TODO: implement searchPodcasts
-    throw UnimplementedError();
+  Future<List<EpisodeData>> searchPodcasts({required String query}) async {
+    try {
+      final response = await _dio.get(
+        '/search_episode_titles',
+        queryParameters: {'q': query},
+      );
+      final episodeList = (response.data['results'] as List)
+          .map((episode) => EpisodeData(
+                id: episode['id'],
+                title: episode['title_original'],
+                description: episode['description_original'],
+                audio: episode['audio'],
+                image: episode['image'],
+                audioLength: episode['audio_length_sec'],
+              ))
+          .toList();
+      return episodeList;
+    } catch (e) {
+      throw handleException(e);
+    }
   }
 
   @override
@@ -41,10 +58,12 @@ class RepoImpl implements Repo {
       throw handleException(e);
     }
   }
-  
+
+  //TODO: get a list of popular searches...
+
   @override
   Future<EpisodeData> getEpisode({required String episodeId}) async {
-    try{
+    try {
       final response = await _dio.get('/episodes/$episodeId');
       final episode = EpisodeData.fromJson(response.data);
       return episode;
