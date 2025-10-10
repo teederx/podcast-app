@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:podcast_app/features/presentation/pages/episodes_page/widgets/episode_list_shimmer.dart';
+import 'package:podcast_app/features/presentation/pages/show_episodes_page/widgets/episode_list_shimmer.dart';
 import 'package:shimmer/shimmer.dart';
 
 class EpisodeShimmer extends StatelessWidget {

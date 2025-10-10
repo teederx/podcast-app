@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:podcast_app/features/presentation/pages/episodes_page/episodes_page.dart';
+import 'package:podcast_app/features/presentation/pages/show_episodes_page/show_episodes_page.dart';
 
 import '../../../../../data/model/podcast/podcast_data.dart';
 import '../home/widget/custom_tile.dart';
@@ -64,11 +64,10 @@ class AllPodcastsList extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(
               context,
-              EpisodesPage.routeName,
+              ShowEpisodesPage.routeName,
               arguments: podcast,
             );
           },
-          showPlayIcon: false,
           showSaveIcon: false,
         );
       },

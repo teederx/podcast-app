@@ -8,9 +8,7 @@ class CustomTile extends StatelessWidget {
     this.subtitle = "",
     this.imageUrl,
     this.onPressed,
-    this.onPlayIconPressed,
     this.onSaveIconPressed,
-    this.showPlayIcon = true,
     this.showSaveIcon = true,
     this.isSaved = false,
   });
@@ -19,9 +17,7 @@ class CustomTile extends StatelessWidget {
   final String subtitle;
   final String? imageUrl;
   final VoidCallback? onPressed;
-  final VoidCallback? onPlayIconPressed;
   final VoidCallback? onSaveIconPressed;
-  final bool showPlayIcon;
   final bool showSaveIcon;
   final bool isSaved;
 
@@ -69,19 +65,6 @@ class CustomTile extends StatelessWidget {
               ],
             ),
           ),
-          if (showPlayIcon)
-            IconButton(
-              icon: Icon(Icons.play_arrow_rounded),
-              style: IconButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                iconSize: 30.sp,
-                foregroundColor: Colors.white,
-              ),
-              onPressed: onPlayIconPressed,
-            ),
           if (showSaveIcon)
             IconButton(
               icon: Icon(isSaved ? Icons.bookmark : Icons.bookmark_outline),

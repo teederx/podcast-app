@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:podcast_app/features/presentation/pages/episodes_page/widgets/episode_list_shimmer.dart';
+import 'package:podcast_app/features/presentation/pages/show_episodes_page/widgets/episode_list_shimmer.dart';
 
 import '../../../../providers/api_search_episode/api_search_episode_provider.dart';
 import 'widget/default_content.dart';
