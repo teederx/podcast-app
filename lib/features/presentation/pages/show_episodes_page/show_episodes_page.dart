@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:podcast_app/core/utils/formatters.dart';
-import 'package:podcast_app/features/presentation/pages/episodes_page/widgets/episode_list_shimmer.dart';
 import 'package:podcast_app/features/presentation/pages/main_page/screens/home/widget/custom_tile.dart';
+import 'package:podcast_app/features/presentation/pages/play_episodes_page/play_episodes_page.dart';
+import 'package:podcast_app/features/presentation/pages/show_episodes_page/widgets/episode_list_shimmer.dart';
 import 'package:podcast_app/features/presentation/providers/episode_for_podcast/episode_provider.dart';
 import 'package:podcast_app/features/presentation/providers/saved_episodes/saved_episode_provider.dart';
 
@@ -12,9 +13,9 @@ import '../../../data/model/podcast/podcast_data.dart';
 import 'widgets/episode_custom_description.dart';
 import 'widgets/episode_custom_title.dart';
 
-class EpisodesPage extends ConsumerWidget {
+class ShowEpisodesPage extends ConsumerWidget {
   static const routeName = '/episodes';
-  const EpisodesPage({super.key});
+  const ShowEpisodesPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,21 +34,21 @@ class EpisodesPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: IconButton.styleFrom(
-                    backgroundColor: Colors.grey[800],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13.r),
-                    ),
+                onPressed: () => Navigator.pop(context),
+                style: IconButton.styleFrom(
+                  backgroundColor: Colors.grey[800],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(13.r),
                   ),
-                  iconSize: 20.sp,
-                  icon: const Icon(Icons.keyboard_backspace_rounded)),
+                ),
+                iconSize: 20.sp,
+                icon: const Icon(Icons.keyboard_backspace_rounded),
+              ),
               10.verticalSpace,
               EpisodeCustomTitle(
                 imageUrl: podcast.image,
                 title: podcast.title,
                 subtitle: podcast.publisher,
-                onPressed: () {},
               ),
               10.verticalSpace,
               EpisodeCustomDescription(
@@ -98,11 +99,13 @@ class EpisodesPage extends ConsumerWidget {
                               title: episode.title,
                               subtitle: formatAudioLength(episode.audioLength),
                               imageUrl: podcast.image,
-                              onPressed: () {},
+                              onPressed: () => Navigator.pushNamed(
+                                  context, PlayEpisodesPage.routeName,
+                                  arguments: episode),
                               isSaved: isSaved,
                               onSaveIconPressed: () => ref
-                                    .read(savedEpisodeProvider.notifier)
-                                    .toggleSavedEpisode(episode: episode),
+                                  .read(savedEpisodeProvider.notifier)
+                                  .toggleSavedEpisode(episode: episode),
                             );
                           },
                         );

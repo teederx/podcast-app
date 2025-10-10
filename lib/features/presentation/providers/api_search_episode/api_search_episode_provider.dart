@@ -13,6 +13,7 @@ final Repo _repo = RepoImpl();
 @riverpod
 class ApiSearchEpisode extends _$ApiSearchEpisode {
   String _lastQuery = "";
+  // ignore: avoid_public_notifier_properties
   String get lastQuery => _lastQuery;
 
   Timer? _debounce;

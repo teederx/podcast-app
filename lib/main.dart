@@ -3,7 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:podcast_app/features/presentation/pages/episodes_page/episodes_page.dart';
+import 'package:podcast_app/features/presentation/pages/play_episodes_page/play_episodes_page.dart';
+import 'package:podcast_app/features/presentation/pages/show_episodes_page/show_episodes_page.dart';
 import 'package:podcast_app/features/presentation/pages/main_page/main_page.dart';
 
 import 'features/data/model/episode/episode_data_adapter.dart';
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
             initialRoute: MainPage.routeName,
             routes: {
               MainPage.routeName: (context) => const MainPage(),
-              EpisodesPage.routeName: (context) => const EpisodesPage()
+              ShowEpisodesPage.routeName: (context) => const ShowEpisodesPage(),
+              PlayEpisodesPage.routeName: (context) => const PlayEpisodesPage(),
             },
           );
         });

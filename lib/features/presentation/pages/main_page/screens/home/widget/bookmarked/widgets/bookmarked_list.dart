@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../../../core/utils/formatters.dart';
 import '../../../../../../../../data/model/episode/episode_data.dart';
 import '../../../../../../../providers/saved_episodes/saved_episode_provider.dart';
+import '../../../../../../play_episodes_page/play_episodes_page.dart';
 import '../../custom_tile.dart';
 
 class BookmarkedList extends ConsumerWidget {
@@ -38,9 +39,9 @@ class BookmarkedList extends ConsumerWidget {
           title: episode.title,
           subtitle: formatAudioLength(episode.audioLength),
           imageUrl: episode.image,
-          onPressed: () {
-            // TODO: navigate to details
-          },
+          onPressed: () => Navigator.pushNamed(
+              context, PlayEpisodesPage.routeName,
+              arguments: episode),
           onSaveIconPressed: () => ref
               .read(savedEpisodeProvider.notifier)
               .toggleSavedEpisode(episode: episode),

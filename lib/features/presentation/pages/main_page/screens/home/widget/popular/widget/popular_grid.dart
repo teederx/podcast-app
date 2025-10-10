@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../../data/model/podcast/podcast_data.dart';
-import '../../../../../../episodes_page/episodes_page.dart';
+import '../../../../../../show_episodes_page/show_episodes_page.dart';
 
 class PopularGrid extends StatelessWidget {
   const PopularGrid({
@@ -28,7 +28,7 @@ class PopularGrid extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                EpisodesPage.routeName,
+                ShowEpisodesPage.routeName,
                 arguments: podcast,
               );
             },

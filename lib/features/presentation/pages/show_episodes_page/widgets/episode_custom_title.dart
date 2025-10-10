@@ -7,15 +7,15 @@ class EpisodeCustomTitle extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.subtitle,
-    this.isBookmarked = false,
-    required this.onPressed,
+    /* this.isBookmarked = false,
+    required this.onPressed, */
   });
 
   final String imageUrl;
   final String title;
   final String subtitle;
-  final bool isBookmarked;
-  final VoidCallback onPressed;
+  /* final bool isBookmarked;
+  final VoidCallback onPressed; */
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +61,14 @@ class EpisodeCustomTitle extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            /* Spacer(),
             IconButton(
               onPressed: onPressed,
               icon: Icon(isBookmarked
                   ? Icons.bookmark_rounded
                   : Icons.bookmark_border_rounded),
               color: Colors.white,
-            ),
+            ), */
           ],
         ),
       ],
